@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.ArrayList;
 
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 @Entity
 public class Survey {
 
-    private @Id @GeneratedValue Long id;
+    private @Id @GeneratedValue(strategy = GenerationType.AUTO) Long id;
     private String title;
     private FeedbackQ feedbackQ;
     private ScoreQ scoreQ;
@@ -58,4 +59,5 @@ public class Survey {
     public void setScoreQ(ScoreQ scoreQ) {
         this.scoreQ = scoreQ;
     }
+
 }
