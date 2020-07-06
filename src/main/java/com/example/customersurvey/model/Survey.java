@@ -13,17 +13,18 @@ import java.util.ArrayList;
 @Table(name="surveys")
 public class Survey {
 
-    private  Long id;
+    private Long id;
     private String title;
     private FeedbackQ feedbackQ;
-    //private ScoreQ scoreQ;
+    private ScoreQ scoreQ;
 
-    public Survey(Long id, String title, FeedbackQ feedbackQ) {
+    public Survey(Long id, String title, FeedbackQ feedbackQ, ScoreQ scoreQ) {
         this.id = id;
         this.title = title;
         this.feedbackQ = feedbackQ;
-
+        this.scoreQ=scoreQ;
     }
+
     public Survey(){}
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
@@ -51,12 +52,9 @@ public class Survey {
         this.feedbackQ = feedbackQ;
     }
 
-   /* public ScoreQ getScoreQ() {
-        return scoreQ;
-    }
+    @OneToOne
+    public ScoreQ getScoreQ() { return scoreQ; }
 
-    public void setScoreQ(ScoreQ scoreQ) {
-        this.scoreQ = scoreQ;
-    }*/
+    public void setScoreQ(ScoreQ scoreQ) { this.scoreQ = scoreQ;}
 
 }

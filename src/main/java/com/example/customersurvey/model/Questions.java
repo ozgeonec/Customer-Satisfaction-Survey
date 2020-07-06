@@ -9,8 +9,10 @@ import javax.persistence.*;
  */
 @Entity
 @Inheritance
+@Table(name="questions")
 public abstract class Questions {
     private @Id @GeneratedValue (strategy = GenerationType.AUTO) Long id;
+    @Column(name="title")
     private String title;
 
     protected Questions(Long id, String title) {
