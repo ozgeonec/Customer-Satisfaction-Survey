@@ -2,10 +2,7 @@ package com.example.customersurvey.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.ArrayList;
 
 /**
@@ -13,21 +10,23 @@ import java.util.ArrayList;
  */
 @Data
 @Entity
+@Table(name="surveys")
 public class Survey {
 
-    private @Id @GeneratedValue(strategy = GenerationType.AUTO) Long id;
+    private  Long id;
     private String title;
     private FeedbackQ feedbackQ;
-    private ScoreQ scoreQ;
+    //private ScoreQ scoreQ;
 
-    public Survey(Long id, String title, FeedbackQ feedbackQ, ScoreQ scoreQ) {
+    public Survey(Long id, String title, FeedbackQ feedbackQ) {
         this.id = id;
         this.title = title;
         this.feedbackQ = feedbackQ;
-        this.scoreQ = scoreQ;
+
     }
     public Survey(){}
 
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     public Long getId() {
         return id;
     }
@@ -35,7 +34,7 @@ public class Survey {
     public void setId(Long id) {
         this.id = id;
     }
-
+    @Column(name="Title", nullable = false)
     public String getTitle() {
         return title;
     }
@@ -43,7 +42,7 @@ public class Survey {
     public void setTitle(String title) {
         this.title = title;
     }
-
+    @OneToOne
     public FeedbackQ getFeedbackQ() {
         return feedbackQ;
     }
@@ -52,12 +51,12 @@ public class Survey {
         this.feedbackQ = feedbackQ;
     }
 
-    public ScoreQ getScoreQ() {
+   /* public ScoreQ getScoreQ() {
         return scoreQ;
     }
 
     public void setScoreQ(ScoreQ scoreQ) {
         this.scoreQ = scoreQ;
-    }
+    }*/
 
 }

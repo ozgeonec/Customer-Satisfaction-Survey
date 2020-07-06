@@ -1,8 +1,11 @@
 package com.example.customersurvey.model;
 
+import javax.persistence.Entity;
+
 /**
  * @author ozgeonec
  */
+@Entity
 public class ScoreQ extends Questions {
     public int response;
 
@@ -10,7 +13,7 @@ public class ScoreQ extends Questions {
         super(id, title);
         this.response=response;
     }
-
+    public ScoreQ(){}
     public int getResponse() {
         return response;
     }

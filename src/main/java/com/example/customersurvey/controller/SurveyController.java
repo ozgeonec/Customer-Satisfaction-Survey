@@ -28,14 +28,16 @@ public class SurveyController {
     public List<Survey> retrieveAllSurveys(){
         return surveyRepo.findAll();
     }
+
     @GetMapping("/surveys/{id}")
     public Survey retrieveItem(@PathVariable Long id){
         Optional<Survey> surveyItem = surveyRepo.findById(id);
-        if(!surveyItem.isPresent()){
+        if(surveyItem.isEmpty()){
             throw new SurveyItemNotFoundException(id);
         }
         return surveyItem.get();
     }
+
     @DeleteMapping("/surveys/{id}")
     public void deleteItem(@PathVariable Long id) {
         surveyRepo.deleteById(id);

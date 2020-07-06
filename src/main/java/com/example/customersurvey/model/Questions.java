@@ -2,16 +2,13 @@ package com.example.customersurvey.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * @author ozgeonec
  */
-@Data
 @Entity
+@Inheritance
 public abstract class Questions {
     private @Id @GeneratedValue (strategy = GenerationType.AUTO) Long id;
     private String title;
@@ -20,6 +17,7 @@ public abstract class Questions {
         this.id = id;
         this.title = title;
     }
+    public Questions(){}
 
     public String getTitle() {
         return title;
