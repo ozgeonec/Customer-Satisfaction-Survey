@@ -6,22 +6,36 @@ import javax.persistence.*;
  * @author ozgeonec
  */
 @Entity
-@Table(name="feedback_type")
+@Table(name="feedbackQ_type")
 public class FeedbackQ {
     private @Id
     @GeneratedValue(strategy = GenerationType.AUTO) Long fbID;
+
     @Column(name="feedback_question")
     private String fbQuestion;
-    @Column(name="feedback_response")
+
+    @Transient
     public String fbResponse;
 
-    public FeedbackQ(Long fbID, String fbQuestion, String fbResponse) {
+    @ManyToOne
+    @JoinColumn(name ="SURVEY_ID")
+    private Survey survey;
+
+    public FeedbackQ(Long fbID, String fbQuestion, Survey survey) {
         this.fbID = fbID;
         this.fbQuestion = fbQuestion;
-        this.fbResponse = fbResponse;
+        this.survey = survey;
     }
 
     public FeedbackQ(){ }
+
+    public Survey getSurvey() {
+        return survey;
+    }
+
+    public void setSurvey(Survey survey) {
+        this.survey = survey;
+    }
 
     public Long getId() {
         return fbID;
@@ -46,4 +60,5 @@ public class FeedbackQ {
     public void setResponse(String fbResponse){
         this.fbResponse=fbResponse;
     }
+
 }

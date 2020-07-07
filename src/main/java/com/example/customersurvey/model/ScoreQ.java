@@ -6,19 +6,34 @@ import javax.persistence.*;
  * @author ozgeonec
  */
 @Entity
-@Table(name= "score_type")
+@Table(name= "scoreQ_type")
 public class ScoreQ {
     private @Id
     @GeneratedValue(strategy = GenerationType.AUTO) Long scoreID;
+
     @Column(name="score_question")
     private String scoreQuestion;
-    @Column(name="score_response")
+
+    @Transient
     public int scoreResponse;
 
-    public ScoreQ(Long scoreID, String scoreQuestion, int scoreResponse) {
+    @ManyToOne
+    @JoinColumn(name ="SURVEY_ID")
+    private Survey survey;
+
+    public ScoreQ(Long scoreID, String scoreQuestion, Survey survey) {
         this.scoreID = scoreID;
         this.scoreQuestion = scoreQuestion;
-        this.scoreResponse = scoreResponse;
+        this.survey = survey;
+
+    }
+
+    public Survey getSurvey() {
+        return survey;
+    }
+
+    public void setSurvey(Survey survey) {
+        this.survey = survey;
     }
 
     public ScoreQ(){}

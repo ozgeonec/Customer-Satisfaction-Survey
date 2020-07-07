@@ -3,60 +3,84 @@ package com.example.customersurvey.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author ozgeonec
  */
-@Data
+
 @Entity
-@Table(name="surveys")
+@Table(name="Survey")
 public class Survey {
 
-    private Long id;
-    private String title;
-    private FeedbackQ feedbackQ;
-    private ScoreQ scoreQ;
+    private @Id
+    @GeneratedValue(strategy = GenerationType.AUTO) Long surveyId;
 
-    public Survey(Long id, String title, FeedbackQ feedbackQ, ScoreQ scoreQ) {
-        this.id = id;
-        this.title = title;
-        this.feedbackQ = feedbackQ;
-        this.scoreQ=scoreQ;
+    @Column
+    private String surveyTitle;
+
+    @Transient
+    private List<String> FeedbackQ;
+    @Transient
+    private List<String> FeedbackResponse;
+
+    @Transient
+    private List<String> ScoreQ;
+    @Transient
+    private List<Integer> ScoreResponse;
+
+    public Survey(Long surveyId, String surveyTitle) {
+        this.surveyId = surveyId;
+        this.surveyTitle = surveyTitle;
     }
 
     public Survey(){}
 
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    public Long getId() {
-        return id;
+    public Long getSurveyId() {
+        return surveyId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-    @Column(name="Title", nullable = false)
-    public String getTitle() {
-        return title;
+    public void setSurveyId(Long surveyId) {
+        this.surveyId = surveyId;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "feedback_type_id")
-    public FeedbackQ getFeedbackQ() {
-        return feedbackQ;
+    public String getSurveyTitle() {
+        return surveyTitle;
     }
 
-    public void setFeedbackQ(FeedbackQ feedbackQ) {
-        this.feedbackQ = feedbackQ;
+    public void setSurveyTitle(String surveyTitle) {
+        this.surveyTitle = surveyTitle;
     }
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "score_type_id")
-    public ScoreQ getScoreQ() { return scoreQ; }
+    public List<String> getFeedbackQ() {
+        return FeedbackQ;
+    }
 
-    public void setScoreQ(ScoreQ scoreQ) { this.scoreQ = scoreQ;}
+    public void setFeedbackQ(List<String> feedbackQ) {
+        FeedbackQ = feedbackQ;
+    }
 
+    public List<String> getFeedbackResponse() {
+        return FeedbackResponse;
+    }
+
+    public void setFeedbackResponse(List<String> feedbackResponse) {
+        FeedbackResponse = feedbackResponse;
+    }
+
+    public List<String> getScoreQ() {
+        return ScoreQ;
+    }
+
+    public void setScoreQ(List<String> scoreQ) {
+        ScoreQ = scoreQ;
+    }
+
+    public List<Integer> getScoreResponse() {
+        return ScoreResponse;
+    }
+
+    public void setScoreResponse(List<Integer> scoreResponse) {
+        ScoreResponse = scoreResponse;
+    }
 }
