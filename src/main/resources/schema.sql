@@ -6,8 +6,5 @@ CREATE TABLE surveys(
     feedbackq VARCHAR(250) NOT NULL,
     scoreq INT NOT NULL
 );
-CREATE TABLE questions(
-    id INT AUTO_INCREMENT  PRIMARY KEY,
-    title VARCHAR(250) NOT NULL
-);
+
 

@@ -43,7 +43,8 @@ public class Survey {
     public void setTitle(String title) {
         this.title = title;
     }
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "feedback_type_id")
     public FeedbackQ getFeedbackQ() {
         return feedbackQ;
     }
@@ -52,7 +53,8 @@ public class Survey {
         this.feedbackQ = feedbackQ;
     }
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "score_type_id")
     public ScoreQ getScoreQ() { return scoreQ; }
 
     public void setScoreQ(ScoreQ scoreQ) { this.scoreQ = scoreQ;}

@@ -1,28 +1,49 @@
 package com.example.customersurvey.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * @author ozgeonec
  */
 @Entity
-@Table(name= "score_question")
-public class ScoreQ extends Questions {
+@Table(name= "score_type")
+public class ScoreQ {
+    private @Id
+    @GeneratedValue(strategy = GenerationType.AUTO) Long scoreID;
+    @Column(name="score_question")
+    private String scoreQuestion;
     @Column(name="score_response")
-    public int response;
+    public int scoreResponse;
 
-    protected ScoreQ(Long id, String title, int response) {
-        super(id, title);
-        this.response=response;
+    public ScoreQ(Long scoreID, String scoreQuestion, int scoreResponse) {
+        this.scoreID = scoreID;
+        this.scoreQuestion = scoreQuestion;
+        this.scoreResponse = scoreResponse;
     }
+
     public ScoreQ(){}
-    public int getResponse() {
-        return response;
+
+    public Long getId() {
+        return scoreID;
     }
 
-    public void setResponse(int response) {
-        this.response = response;
+    public void setId(Long scoreID) {
+        this.scoreID = scoreID;
+    }
+
+    public String getQuestion() {
+        return scoreQuestion;
+    }
+
+    public void setQuestion(String scoreQuestion) {
+        this.scoreQuestion = scoreQuestion;
+    }
+
+    public int getResponse() {
+        return scoreResponse;
+    }
+
+    public void setResponse(int scoreResponse) {
+        this.scoreResponse = scoreResponse;
     }
 }

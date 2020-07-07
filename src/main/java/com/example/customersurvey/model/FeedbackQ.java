@@ -1,27 +1,49 @@
 package com.example.customersurvey.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * @author ozgeonec
  */
 @Entity
-@Table(name="feedback_question")
-public class FeedbackQ extends Questions {
+@Table(name="feedback_type")
+public class FeedbackQ {
+    private @Id
+    @GeneratedValue(strategy = GenerationType.AUTO) Long fbID;
+    @Column(name="feedback_question")
+    private String fbQuestion;
     @Column(name="feedback_response")
-    public String response;
+    public String fbResponse;
 
-    protected FeedbackQ(Long id, String title, String response) {
-        super(id, title);
-        this.response=response;
+    public FeedbackQ(Long fbID, String fbQuestion, String fbResponse) {
+        this.fbID = fbID;
+        this.fbQuestion = fbQuestion;
+        this.fbResponse = fbResponse;
     }
+
     public FeedbackQ(){ }
-    public String getResponse(){
-        return response;
+
+    public Long getId() {
+        return fbID;
     }
-    public void setResponse(String response){
-        this.response=response;
+
+    public void setId(Long fbID) {
+        this.fbID = fbID;
+    }
+
+    public String getQuestion() {
+        return fbQuestion;
+    }
+
+    public void setQuestion(String fbQuestion) {
+        this.fbQuestion = fbQuestion;
+    }
+
+    public String getResponse(){
+        return fbResponse;
+    }
+
+    public void setResponse(String fbResponse){
+        this.fbResponse=fbResponse;
     }
 }
