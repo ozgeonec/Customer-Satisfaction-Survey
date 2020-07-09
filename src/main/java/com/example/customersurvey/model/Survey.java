@@ -20,7 +20,7 @@ public class Survey {
     private String surveyTitle;
 
     @Transient
-    private List<String> FeedbackQ;
+    private String FeedbackQ;
     @Transient
     private List<String> FeedbackResponse;
 
@@ -52,11 +52,11 @@ public class Survey {
         this.surveyTitle = surveyTitle;
     }
 
-    public List<String> getFeedbackQ() {
+    public String getFeedbackQ() {
         return FeedbackQ;
     }
 
-    public void setFeedbackQ(List<String> feedbackQ) {
+    public void setFeedbackQ(String feedbackQ) {
         FeedbackQ = feedbackQ;
     }
 

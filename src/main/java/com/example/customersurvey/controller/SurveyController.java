@@ -1,6 +1,5 @@
 package com.example.customersurvey.controller;
 
-import com.example.customersurvey.model.FeedbackQ;
 import com.example.customersurvey.model.FeedbackResponse;
 import com.example.customersurvey.model.ScoreResponse;
 import com.example.customersurvey.model.Survey;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -75,15 +75,41 @@ public class SurveyController {
     public List<ScoreResponse> getAllScore(){
         return scoreResponseRepo.findAll();
     }
-   /* @GetMapping("/surveys/{id}/all_responses")
-    public String  getAllResponses(@RequestBody Survey survey, @PathVariable Long id){
+    @GetMapping("/surveys/{id}/all_responses")
+    public String getAllResponses(@RequestBody Survey survey, @PathVariable Long id){
+       String responses = feedbackResponseRepo.toString() + scoreResponseRepo.toString();
         Optional<Survey> existingSurvey = surveyRepo.findById(id);
-        if(existingSurvey.equals(survey)) {
-            return "Survey name: " + survey.getSurveyTitle() + survey.getFeedbackQ() + survey.getFeedbackResponse() +
-                    survey.getScoreQ() + survey.getScoreResponse();
+        if(existingSurvey.isPresent()) {
+            return responses;
+        }else throw new SurveyItemNotFoundException(id);
+    }
+  /*  public int getNpmScore(){
+        int NPS=0;
+        for (Survey survey : surveyRepo.findAll()) {
+            List<ScoreResponse> scores = scoreResponseRepo.findAllById(survey.getSurveyId());
+            int promoterCount = 0;
+            int detractorCount = 0;
+            for (ScoreResponse score : scores) {
+                if (score.getScoreResponse() >= 9) {
+                    promoterCount++;
+                } else if (score.getScoreResponse() <= 6) {
+                    detractorCount++;
+                }
+            }
+            int answerCount = scores.size();
+            NPS = (100 * (promoterCount - detractorCount)) / answerCount;
         }
 
+        return NPS;
     }*/
+   /* public void listNpmScores(){
+        int NPS= getNpmScore();
+        List<Survey> surveyList = surveyRepo.findAll();
+        for(Survey survey : surveyRepo.findAll()){
 
+        }
+        existingSurvey.setScoreResponse(Collections.singletonList(NPS));
+        surveyRepo.save(existingSurvey);
+    }*/
 
 }
