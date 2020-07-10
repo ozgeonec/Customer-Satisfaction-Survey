@@ -14,27 +14,25 @@ import java.util.List;
 public class Survey {
 
     private @Id
-    @GeneratedValue(strategy = GenerationType.AUTO) Long surveyId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY) Long surveyId;
 
     @Column
     private String surveyTitle;
 
-    @Transient
-    private String FeedbackQ;
-    @Transient
-    private List<String> FeedbackResponse;
+    @Column
+    private int npmScore;
 
-    @Transient
-    private List<String> ScoreQ;
-    @Transient
-    private List<Integer> ScoreResponse;
-
-    public Survey(Long surveyId, String surveyTitle) {
+    public Survey(Long surveyId, String surveyTitle, int npmScore) {
         this.surveyId = surveyId;
         this.surveyTitle = surveyTitle;
+        this.npmScore = npmScore;
     }
 
     public Survey(){}
+
+    public int getNpmScore() { return npmScore; }
+
+    public void setNpmScore(int npmScore) { this.npmScore = npmScore; }
 
     public Long getSurveyId() {
         return surveyId;
@@ -52,35 +50,5 @@ public class Survey {
         this.surveyTitle = surveyTitle;
     }
 
-    public String getFeedbackQ() {
-        return FeedbackQ;
-    }
 
-    public void setFeedbackQ(String feedbackQ) {
-        FeedbackQ = feedbackQ;
-    }
-
-    public List<String> getFeedbackResponse() {
-        return FeedbackResponse;
-    }
-
-    public void setFeedbackResponse(List<String> feedbackResponse) {
-        FeedbackResponse = feedbackResponse;
-    }
-
-    public List<String> getScoreQ() {
-        return ScoreQ;
-    }
-
-    public void setScoreQ(List<String> scoreQ) {
-        ScoreQ = scoreQ;
-    }
-
-    public List<Integer> getScoreResponse() {
-        return ScoreResponse;
-    }
-
-    public void setScoreResponse(List<Integer> scoreResponse) {
-        ScoreResponse = scoreResponse;
-    }
 }

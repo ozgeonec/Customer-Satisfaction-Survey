@@ -1,10 +1,6 @@
 package com.example.customersurvey.controller;
 
-import com.example.customersurvey.model.FeedbackResponse;
-import com.example.customersurvey.model.ScoreResponse;
 import com.example.customersurvey.model.Survey;
-import com.example.customersurvey.repository.FeedbackResponseRepo;
-import com.example.customersurvey.repository.ScoreResponseRepo;
 import com.example.customersurvey.repository.SurveyRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,8 +18,7 @@ import java.util.Optional;
 public class SurveyController {
 
     private SurveyRepo surveyRepo;
-    private FeedbackResponseRepo feedbackResponseRepo;
-    private ScoreResponseRepo scoreResponseRepo;
+
 
     @Autowired
     public SurveyController(SurveyRepo surveyRepo) {
@@ -67,7 +61,7 @@ public class SurveyController {
         surveyRepo.save(survey);
         return ResponseEntity.noContent().build();
     }
-    @GetMapping("/surveys/{id}/fb_responses")
+   /* @GetMapping("/surveys/{id}/fb_responses")
     public List<FeedbackResponse> getAllFeedback(){
         return feedbackResponseRepo.findAll();
     }
@@ -82,7 +76,7 @@ public class SurveyController {
         if(existingSurvey.isPresent()) {
             return responses;
         }else throw new SurveyItemNotFoundException(id);
-    }
+    }*/
   /*  public int getNpmScore(){
         int NPS=0;
         for (Survey survey : surveyRepo.findAll()) {
