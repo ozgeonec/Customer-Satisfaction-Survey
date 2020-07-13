@@ -13,6 +13,6 @@ import java.util.List;
 @Repository
 public interface ResponsesRepo extends JpaRepository<Responses, Long> {
 
-    @Query("SELECT feedback, score FROM responses r  WHERE r.survey_id = s.survey_id ")
-    List<Responses> getResponsesFromSurveyId(Long surveyId);
+   //@Query("SELECT * FROM Responses WHERE surveyId " )
+    List<Responses> findAllBySurveySurveyId(Long surveyId);
 }

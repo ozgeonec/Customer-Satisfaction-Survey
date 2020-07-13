@@ -12,6 +12,7 @@ import java.util.List;
  */
 @Repository
 public interface SurveyRepo extends JpaRepository<Survey,Long> {
-   /* @Query("select title from Survey")
-    List<String> findAllTitles();*/
+    //Boolean existsBySurveyTitle(String  surveyTitle);
+    /*@Query("select surveyTitle from Survey")
+    List<String> findAllSurveyTitles();*/
 }

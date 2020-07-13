@@ -3,36 +3,34 @@ package com.example.customersurvey.controller;
 import com.example.customersurvey.model.Responses;
 import com.example.customersurvey.repository.ResponsesRepo;
 import com.example.customersurvey.repository.SurveyRepo;
+import com.example.customersurvey.service.ResponseService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author ozgeonec
  */
-@RequestMapping("/responses")
+
 @RestController
 public class ResponseController {
 
-    private ResponsesRepo responsesRepo;
+    private ResponseService responseService;
 
 
-    @Autowired
-    public ResponseController(ResponsesRepo responsesRepo) {
-        this.responsesRepo = responsesRepo;
-    }
-    @GetMapping
+    @GetMapping("/responses")
     public List<Responses> retrieveAllResponses(){
-        return  responsesRepo.findAll();
+        return  responseService.getResponses();
     }
 
-    @GetMapping("/surveys/{id}")
-    public List<Responses> getResponsesFromSurveyId(@PathVariable Long surveyId){
-        return responsesRepo.getResponsesFromSurveyId(surveyId);
+    @PostMapping
+    public Responses submitResponse(@RequestBody Responses response) {
+        if ((response.getSurvey() != null) && (response.getScore() >= 0 || response.getScore() <= 10)) {
+            return responseService.submitResponse(response);
+        }else throw new SurveyItemNotFoundException(response.getSurvey().getSurveyId());
     }
+
 
 }

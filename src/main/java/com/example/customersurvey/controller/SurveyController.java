@@ -2,6 +2,7 @@ package com.example.customersurvey.controller;
 
 import com.example.customersurvey.model.Survey;
 import com.example.customersurvey.repository.SurveyRepo;
+import com.example.customersurvey.service.SurveyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,66 +18,44 @@ import java.util.Optional;
 @RestController
 public class SurveyController {
 
-    private SurveyRepo surveyRepo;
-
-
     @Autowired
-    public SurveyController(SurveyRepo surveyRepo) {
-        this.surveyRepo = surveyRepo;
-    }
+    private SurveyService surveyService;
+
 
     @GetMapping("/surveys")
     public List<Survey> retrieveAllSurveys(){
-        return surveyRepo.findAll();
+        return surveyService.retrieveAllSurveys();
     }
 
     @GetMapping("/surveys/{id}")
     public Survey retrieveItem(@PathVariable Long id){
-        Optional<Survey> surveyItem = surveyRepo.findById(id);
-        if(surveyItem.isEmpty()){
-            throw new SurveyItemNotFoundException(id);
-        }
-        return surveyItem.get();
+       return surveyService.retrieveItem(id);
     }
 
     @DeleteMapping("/surveys/{id}")
     public void deleteItem(@PathVariable Long id) {
-        surveyRepo.deleteById(id);
+        surveyService.deleteItem(id);
     }
 
     @PostMapping("/surveys")
     public ResponseEntity<Object> createSurvey(@RequestBody Survey survey){
-        Survey savedSurveyItem = surveyRepo.save(survey);
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(savedSurveyItem.getSurveyId()).toUri();
-        return ResponseEntity.created(location).body(savedSurveyItem);
+        return surveyService.createSurvey(survey);
     }
     @PutMapping("/surveys/{id}")
     public ResponseEntity<Object> updateSurvey(@RequestBody Survey survey, @PathVariable Long id){
-        Optional<Survey> existingSurvey = surveyRepo.findById(id);
-        if (existingSurvey.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-        survey.setSurveyId(id);
-        surveyRepo.save(survey);
-        return ResponseEntity.noContent().build();
+       return surveyService.updateSurvey(survey,id);
     }
-   /* @GetMapping("/surveys/{id}/fb_responses")
-    public List<FeedbackResponse> getAllFeedback(){
-        return feedbackResponseRepo.findAll();
-    }
-    @GetMapping("/surveys/{id}/score_responses")
-    public List<ScoreResponse> getAllScore(){
-        return scoreResponseRepo.findAll();
-    }
-    @GetMapping("/surveys/{id}/all_responses")
-    public String getAllResponses(@RequestBody Survey survey, @PathVariable Long id){
-       String responses = feedbackResponseRepo.toString() + scoreResponseRepo.toString();
-        Optional<Survey> existingSurvey = surveyRepo.findById(id);
-        if(existingSurvey.isPresent()) {
-            return responses;
-        }else throw new SurveyItemNotFoundException(id);
+   /* @GetMapping("/titles")
+    public List<String> getAllTitles(){
+        return surveyService.getAllTitles();
     }*/
+
+    @GetMapping("/titles/{id}")
+    public String getTitle(Long id){
+        return surveyService.getTitleById(id);
+    }
+
+    //NPM score Calculations
   /*  public int getNpmScore(){
         int NPS=0;
         for (Survey survey : surveyRepo.findAll()) {
