@@ -37,10 +37,6 @@ public class SurveyController {
         surveyService.deleteItem(id);
     }
 
-    /*@PostMapping("/surveys/create")
-    public ResponseEntity<Object> createSurvey(@RequestBody Survey survey){
-        return surveyService.createSurvey(survey);
-    }*/
     @PostMapping("/surveys")
     public Survey saveSurvey(@RequestBody Survey survey){
         return surveyService.saveSurvey(survey);
@@ -49,10 +45,6 @@ public class SurveyController {
     public ResponseEntity<Object> updateSurvey(@RequestBody Survey survey, @PathVariable Long id){
        return surveyService.updateSurvey(survey,id);
     }
-   /* @GetMapping("/titles")
-    public List<String> getAllTitles(){
-        return surveyService.getAllTitles();
-    }*/
 
     @GetMapping("/titles/{id}")
     public String getTitle(Long id){

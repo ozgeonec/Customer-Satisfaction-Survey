@@ -16,7 +16,7 @@ import java.util.Objects;
 
 @RestController
 public class ResponseController {
-
+    @Autowired
     private ResponseService responseService;
 
 
@@ -25,12 +25,15 @@ public class ResponseController {
         return  responseService.getResponses();
     }
 
-    @PostMapping
+    @PostMapping("/responses")
     public Responses submitResponse(@RequestBody Responses response) {
         if ((response.getSurvey() != null) && (response.getScore() >= 0 || response.getScore() <= 10)) {
             return responseService.submitResponse(response);
         }else throw new SurveyItemNotFoundException(response.getSurvey().getSurveyId());
     }
-
+    @GetMapping("/title/{surveyId}")
+    public List<Responses> getResponseByTitle(Long surveyId){
+        return responseService.retrieveResponsesBySurvey(surveyId);
+    }
 
 }

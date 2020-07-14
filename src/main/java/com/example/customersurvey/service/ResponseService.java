@@ -2,7 +2,6 @@ package com.example.customersurvey.service;
 
 import com.example.customersurvey.model.Responses;
 import com.example.customersurvey.repository.ResponsesRepo;
-import com.example.customersurvey.repository.SurveyRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
