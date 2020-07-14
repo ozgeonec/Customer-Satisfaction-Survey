@@ -13,6 +13,5 @@ import java.util.List;
 @Repository
 public interface ResponsesRepo extends JpaRepository<Responses, Long> {
 
-   //@Query("SELECT * FROM Responses WHERE surveyId " )
     List<Responses> findAllBySurveySurveyId(Long surveyId);
 }

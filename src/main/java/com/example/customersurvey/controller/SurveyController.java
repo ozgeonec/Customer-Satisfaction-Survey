@@ -37,9 +37,13 @@ public class SurveyController {
         surveyService.deleteItem(id);
     }
 
-    @PostMapping("/surveys")
+    /*@PostMapping("/surveys/create")
     public ResponseEntity<Object> createSurvey(@RequestBody Survey survey){
         return surveyService.createSurvey(survey);
+    }*/
+    @PostMapping("/surveys")
+    public Survey saveSurvey(@RequestBody Survey survey){
+        return surveyService.saveSurvey(survey);
     }
     @PutMapping("/surveys/{id}")
     public ResponseEntity<Object> updateSurvey(@RequestBody Survey survey, @PathVariable Long id){

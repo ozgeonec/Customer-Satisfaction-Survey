@@ -39,6 +39,10 @@ public class SurveyService {
         }
         return surveyItem.get().getSurveyTitle();
     }
+    //Save Survey
+    public Survey saveSurvey(Survey survey){
+        return surveyRepo.save(survey);
+    }
     //Create Survey
     public ResponseEntity<Object> createSurvey(Survey survey){
         Survey savedSurveyItem = surveyRepo.save(survey);
